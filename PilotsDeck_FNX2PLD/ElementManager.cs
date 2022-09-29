@@ -168,19 +168,14 @@ namespace PilotsDeck_FNX2PLD
                     result = "8888\n888*";
                 else
                 {
-                    if (isModeSpd)
-                        result = "SPD\n";
-                    else
-                        result = "MACH\n";
-
                     if (isSpdManaged)
-                        result += "---*";
+                        result = "---*";
                     else
                     {
                         if (isModeSpd)
-                            result += ((int)Math.Round(fcu.MemoryOffsets["fcuSpd"].GetValue())).ToString();
+                            result = ((int)Math.Round(fcu.MemoryOffsets["fcuSpd"].GetValue())).ToString();
                         else
-                            result += "." + ((int)Math.Round(fcu.MemoryOffsets["fcuSpd"].GetValue())).ToString();
+                            result = "." + ((int)Math.Round(fcu.MemoryOffsets["fcuSpd"].GetValue())).ToString();
                     }
                 }
             }
@@ -194,24 +189,19 @@ namespace PilotsDeck_FNX2PLD
                     result = "888\n888*";
                 else
                 {
-                    if (isModeHdgVs)
-                        result = "HDG\n";
-                    else
-                        result = "TRK\n";
-
                     string hdgDisp = fcu.MemoryOffsets["fcuHdgDisplay"].GetValue()?.ToString("D3") ?? "000";
                     string hdgFma = fcu.MemoryOffsets["fcuHdgFma"].GetValue()?.ToString("D3") ?? "000";
 
                     if (isHdgManaged)
                     {
                         if (hdgDisp != "000")
-                            result += hdgDisp + "*";
+                            result = hdgDisp + "*";
                         else
-                            result += "---*";
+                            result = "---*";
                     }
                     else
                     {
-                        result += hdgFma;
+                        result = hdgFma;
                     }
                 }
             }
@@ -242,19 +232,6 @@ namespace PilotsDeck_FNX2PLD
                     result = "888\n+8888";
                 else
                 {
-                    if (isModeHdgVs)
-                        result = "V/S\n";
-                    else
-                        result = "FPA\n";
-
-                    //int vs = 0;
-                    //if (isAltVs)
-                    //    vs = fcu.MemoryOffsets["fcuVsFma"].GetValue() ?? 0;
-                    //else
-                    //    vs = fcu.MemoryOffsets["fcuVsDisplay"].GetValue() ?? 0;
-
-                    //if (!isAltVs)
-                    //    result += "-----";
                     int vs = fcu.MemoryOffsets["fcuVsDisplay"].GetValue() ?? 0;
                     bool sourceIsDisplay = vs != 0;
                     if (isAltVs)
@@ -267,7 +244,7 @@ namespace PilotsDeck_FNX2PLD
                         if (vs >= 0)
                             result += "+";
 
-                        result += vs.ToString("D4");
+                        result = vs.ToString("D4");
                     }
                     else //fpa
                     {
@@ -275,7 +252,7 @@ namespace PilotsDeck_FNX2PLD
                         if (fpa >= 0.0f)
                             result += "+";
 
-                        result += fpa.ToString("F1", formatInfo);
+                        result = fpa.ToString("F1", formatInfo);
                     }
                     lastValueVS = vs;
                 }
